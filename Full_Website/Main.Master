@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="Full_Website.Main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Huron to Erie Corridor Water Quality Monitoring</title>
+    <link href="Style/Main.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type ="text/css">a {text-decoration:none}
+        #mainWrapper
+        {
+            position: relative;
+            background-color: white;
+            width: 1000px;
+            min-height: 500px;
+            margin:0 auto; 
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="mainWrapper">
+        <form id="form1" runat="server">
+            <div id="MainData">
+                <p id="Header">
+                    <img src="Pictures/HUW.png" style="float: left; height:100px; width:86px;"/>
+                    <asp:Label ID="Label1" runat="server" Text="Huron to Erie Drinking Water Monitoring Network" Font-Bold="True" Font-Size="XX-Large" CssClass="centermiddle"></asp:Label>
+                    <img src="Pictures/Wayne.png" style="float:right; height:100px; width:96px"/>
+                </p>
+                <div id="Menu">
+                    <asp:Panel ID="MenuTop" runat="server" Font-Bold="True" Font-Names="Calibri" Font-Size="X-Large">
+                        <a href="Home.aspx">Home</a> | <a href="Query.aspx">Data</a> | <a href="Querytop.aspx">High/Low Queries</a> |<a href="Project.aspx">Project Info</a>  | <a href="About.aspx">About</a>  | <a href="Contribue.aspx">Contribute</a> 
+                    </asp:Panel>
+                </div>
+                <div id="Content" style="height:auto;">
+                    <div id="ContentPlaceHolderBox" style="z-index: 1; height:auto;">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <div id="Footer">footer for Copyrights</div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

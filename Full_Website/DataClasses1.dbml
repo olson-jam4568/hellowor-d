@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WQ_FOUR" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-NAE64CG8\SQLEXPRESS;Initial Catalog=WQ_FOUR;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WQ_FOURConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ACTIVITY_TYPE" Member="ACTIVITY_TYPEs">
+    <Type Name="ACTIVITY_TYPE">
+      <Column Name="ACT_TYPE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ACT_TYPE_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ACT_MEDIA" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="ACTIVITY_TYPE_RESULT" Member="RESULTs" ThisKey="ACT_TYPE_ID" OtherKey="ACT_TYPE_ID" Type="RESULT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.COUNTIES" Member="COUNTies">
+    <Type Name="COUNTy">
+      <Column Name="COUNTY_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="COUNTY" Member="COUNTY1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="STATE" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="COUNTRY" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="COUNTy_MONITORING_LOCATION" Member="MONITORING_LOCATIONs" ThisKey="COUNTY_ID" OtherKey="COUNTY_ID" Type="MONITORING_LOCATION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MONITORING_LOCATION" Member="MONITORING_LOCATIONs">
+    <Type Name="MONITORING_LOCATION">
+      <Column Name="MLOC_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MLOC_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MLOC_LAT" Type="System.Decimal" DbType="Decimal(18,10) NOT NULL" CanBeNull="false" />
+      <Column Name="MLOC_LONG" Type="System.Decimal" DbType="Decimal(18,10)" CanBeNull="true" />
+      <Column Name="COUNTY_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WATERBODY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="MONITORING_LOCATION_PROJECT_MLOCATION" Member="PROJECT_MLOCATIONs" ThisKey="MLOC_ID" OtherKey="MLOC_ID" Type="PROJECT_MLOCATION" />
+      <Association Name="MONITORING_LOCATION_RESULT" Member="RESULTs" ThisKey="MLOC_ID" OtherKey="MLOC_ID" Type="RESULT" />
+      <Association Name="COUNTy_MONITORING_LOCATION" Member="COUNTy" ThisKey="COUNTY_ID" OtherKey="COUNTY_ID" Type="COUNTy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORGANIZATION" Member="ORGANIZATIONs">
+    <Type Name="ORGANIZATION">
+      <Column Name="ORG_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ORG_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ORG_TYPE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="ORGANIZATION_PROJECT" Member="PROJECTs" ThisKey="ORG_ID" OtherKey="ORG_ID" Type="PROJECT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PARAMETERS" Member="PARAMETERs">
+    <Type Name="PARAMETER">
+      <Column Name="PARAM_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PARAM_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UNIT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="PARAMETER_RESULT" Member="RESULTs" ThisKey="PARAM_ID" OtherKey="PARAM_ID" Type="RESULT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PROJECT" Member="PROJECTs">
+    <Type Name="PROJECT">
+      <Column Name="PRJ_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PRJ_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ORG_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PROJECT_PROJECT_MLOCATION" Member="PROJECT_MLOCATIONs" ThisKey="PRJ_ID" OtherKey="PRJ_ID" Type="PROJECT_MLOCATION" />
+      <Association Name="ORGANIZATION_PROJECT" Member="ORGANIZATION" ThisKey="ORG_ID" OtherKey="ORG_ID" Type="ORGANIZATION" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PROJECT_MLOCATION" Member="PROJECT_MLOCATIONs">
+    <Type Name="PROJECT_MLOCATION">
+      <Column Name="PML_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PRJ_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MLOC_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MONITORING_LOCATION_PROJECT_MLOCATION" Member="MONITORING_LOCATION" ThisKey="MLOC_ID" OtherKey="MLOC_ID" Type="MONITORING_LOCATION" IsForeignKey="true" />
+      <Association Name="PROJECT_PROJECT_MLOCATION" Member="PROJECT" ThisKey="PRJ_ID" OtherKey="PRJ_ID" Type="PROJECT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RESULTS" Member="RESULTs">
+    <Type Name="RESULT">
+      <Column Name="RES_ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RES_MEASURE" Type="System.Decimal" DbType="Decimal(20,10) NOT NULL" CanBeNull="false" />
+      <Column Name="PARAM_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RES_DATE_TIME" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="RES_DATE" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="MLOC_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ACT_TYPE_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ACTIVITY_TYPE_RESULT" Member="ACTIVITY_TYPE" ThisKey="ACT_TYPE_ID" OtherKey="ACT_TYPE_ID" Type="ACTIVITY_TYPE" IsForeignKey="true" />
+      <Association Name="MONITORING_LOCATION_RESULT" Member="MONITORING_LOCATION" ThisKey="MLOC_ID" OtherKey="MLOC_ID" Type="MONITORING_LOCATION" IsForeignKey="true" />
+      <Association Name="PARAMETER_RESULT" Member="PARAMETER" ThisKey="PARAM_ID" OtherKey="PARAM_ID" Type="PARAMETER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.spMlocDropDownFromProj" Method="spMlocDropDownFromProj">
+    <Parameter Name="PRJ_ID" Parameter="pRJ_ID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spMlocDropDownFromProjResult">
+      <Column Name="MLOC_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MLOC_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spParamDropDownFromMloc" Method="spParamDropDownFromMloc">
+    <Parameter Name="MLOC_ID" Parameter="mLOC_ID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spParamDropDownFromMlocResult">
+      <Column Name="PARAM_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PARAM_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SPGetByMlocParam" Method="SPGetByMlocParam">
+    <Parameter Name="MLOC_ID" Parameter="mLOC_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PARAM_ID" Parameter="pARAM_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SRESDATE" Parameter="sRESDATE" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="ERESDATE" Parameter="eRESDATE" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="SPGetByMlocParamResult">
+      <Column Name="RES_MEASURE" Type="System.Decimal" DbType="Decimal(20,10) NOT NULL" CanBeNull="false" />
+      <Column Name="UNIT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PARAM_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RES_DATE_TIME" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="MLOC_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PRJ_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spTopTenNoDates" Method="spTopTenNoDates">
+    <Parameter Name="PRJ_ID" Parameter="pRJ_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MLOC_ID" Parameter="mLOC_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PARAM_ID" Parameter="pARAM_ID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spTopTenNoDatesResult">
+      <Column Name="RES_MEASURE" Type="System.Decimal" DbType="Decimal(20,10) NOT NULL" CanBeNull="false" />
+      <Column Name="UNIT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PARAM_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RES_DATE_TIME" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="MLOC_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PRJ_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spLowTenNoDates" Method="spLowTenNoDates">
+    <Parameter Name="PRJ_ID" Parameter="pRJ_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MLOC_ID" Parameter="mLOC_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PARAM_ID" Parameter="pARAM_ID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spLowTenNoDatesResult">
+      <Column Name="RES_MEASURE" Type="System.Decimal" DbType="Decimal(20,10) NOT NULL" CanBeNull="false" />
+      <Column Name="UNIT" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PARAM_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RES_DATE_TIME" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="MLOC_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PRJ_NAME" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

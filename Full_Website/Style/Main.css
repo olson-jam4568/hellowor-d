@@ -1,0 +1,73 @@
+﻿body 
+{
+    font-family: Calibri, Verdana, sans-serif;
+    font-size: 12pt;
+    background-color: #d1e3ef;
+    height: auto;
+    
+     
+}
+
+#Maindata
+{
+    position: relative;
+    width: 600px;
+    margin: auto;
+    background-color: #d1e3ef;
+    top: auto;
+}
+
+#Header
+{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background-color: #d1e3ef;
+    font-size: 16pt;
+    font-weight: 700;
+    text-align: center;  
+}
+
+#Menu
+{
+    width: 100%;
+    height: 28px;
+    background-color: white;
+    
+    
+}
+
+#Content
+{
+    width: 100%;
+    background-color: white;
+    height:1000px;
+    
+}
+
+
+
+#Footer
+{
+    clear: both;
+    width: 100%;
+    height: 20px;
+    background-color: #d1e3ef;
+    text-align:center;
+   
+}
+
+.center {
+   margin:auto;
+   width: 50%;
+}
+
+.centermiddle{
+    position: absolute;
+    left: 0;
+    top:50%;
+    width:100%;
+    text-align: center;
+
+    
+}
